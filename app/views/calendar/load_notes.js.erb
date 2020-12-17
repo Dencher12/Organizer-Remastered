@@ -1,0 +1,5 @@
+showCalendar(<%= month %>, <%= year %>);
+<% @notes.each do |note| %>
+  var day = <%= note.date.strftime("%d") %>;
+  $(`span:contains(${day})`).siblings('ul').append('<li><%= note.title %></li>');
+<% end %>
