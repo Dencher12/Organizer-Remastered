@@ -16,8 +16,6 @@ $(document).ready(() => {
     let selectMonth = document.getElementById("month");
     let createYear = generate_year_range(1970, 2077);
 
-    console.log(document.getElementById("year"));
-
     document.getElementById("year").innerHTML = createYear;
 
     let calendar = document.getElementById("calendar");
@@ -67,6 +65,21 @@ $(document).ready(() => {
                   cell.setAttribute("data-month", month + 1);
                   cell.setAttribute("data-year", year);
                   cell.setAttribute("data-month_name", months[month]);
+                  cell.addEventListener("click", function(e){
+                    $(".curtain").css("visibility", "visible");
+                    $(".modal-window").css("display", "flex");
+                    console.log($(`.modal-table.id-${this.getAttribute('data-date')}`))
+                    $(`.modal-table.id-${this.getAttribute('data-date')}`).css("display", "grid");
+                    $('.form-create .date').attr('value', this.getAttribute('data-year')+'-'+this.getAttribute('data-month')+'-'+this.getAttribute('data-date'))
+                  });
+                  $(".modal-window .content").append(`
+                  <div class='modal-table id-${date}'>
+                    <div class='modal-cell-head'>Название</div>
+                    <div class='modal-cell-head'>Описание</div>
+                    <div class='modal-cell-head'>Дата</div>
+                    <div></div>
+                  </div>`
+                  )
                   cell.className = "date-picker";
                   cell.innerHTML = "<span>" + date + '</span> <ul></ul>';
 
@@ -82,7 +95,6 @@ $(document).ready(() => {
       }
     }
 
-    showCalendar(currentMonth, currentYear);
 
     $('#next').click(()=>{
       currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
@@ -101,7 +113,6 @@ $(document).ready(() => {
       currentMonth = parseInt(selectMonth.value);
       $.get( "/load_notes", {year: currentYear, month: currentMonth});
     });
-  
 
     function daysInMonth(iMonth, iYear) {
       return 32 - new Date(iYear, iMonth, 32).getDate();

@@ -11,10 +11,11 @@ class CalendarController < ApplicationController
     month = calendar_params[:month]
 
     format_month = (month.to_i + 1).to_s
-    format_month = "0#{month}" if month.size == 1
+    format_month = "0#{format_month}" if month.size == 1
    
     @notes = current_user.notes.where("to_char(date,'YYYY-MM') = ?", "#{year}-#{format_month}")
-    render 'calendar/load_notes', locals: {month: month, year: year}, format: :js   
+
+    render 'load_notes', locals: {month: month, year: year} 
   end
 
   private

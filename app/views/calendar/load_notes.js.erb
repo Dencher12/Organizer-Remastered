@@ -1,5 +1,23 @@
+$('.modal-table').remove();
 showCalendar(<%= month %>, <%= year %>);
 <% @notes.each do |note| %>
   var day = <%= note.date.strftime("%d") %>;
-  $(`span:contains(${day})`).siblings('ul').append('<li><%= note.title %></li>');
+  var id = <%= note.id %>;
+  $(`.date-picker[data-date="${day}"] ul`).append(`<li data-id="${id}"><%= note.title %></li>`);
+
+  $(`.modal-table.id-${day}`).append(
+  `<div class='modal-row' data-id='${id}'>
+     <div class='modal-cell'><%= note.title %></div>
+     <div class='modal-cell'><%= note.text %></div>
+     <div class='modal-cell'><%= note.date %></div>
+     <div class='modal-close'></div>
+   </div>`)
 <% end %>
+
+$('.modal-close').click(function() {
+      let id = $(this).parent('.modal-row').attr('data-id');
+      $.ajax({
+        url: `/notes/${id}`,
+        type: 'DELETE'
+      });
+    });

@@ -1,0 +1,5 @@
+var day = <%= @note.date.strftime("%d") %>;
+var id = <%= @note.id %>;
+
+$(`.date-picker[data-date="${day}"] ul li[data-id=${id}]`).remove();
+$(`.modal-table.id-${day} .modal-row[data-id="${id}"]`).remove();

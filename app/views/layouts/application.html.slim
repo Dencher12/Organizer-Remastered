@@ -10,6 +10,19 @@ html
 
   body
     p class="notice" = notice
-    p class="alert" = alert 
+    p class="alert" = alert
+    = link_to "Выйти", destroy_user_session_path, method: :delete 
 
+    .curtain
+    .modal-window
+      .top-bar
+        .window-name
+        .close-btn
+      .content
+      .form-create
+        = form_with(url: '/notes', method: :post, remote: true) do |f|
+          = f.text_field :title, placeholder: "Название"
+          = f.text_field :text, placeholder: "Описание"
+          = f.text_field :date, class: 'date'
+          = f.submit "Создать"
     = yield
