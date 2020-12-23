@@ -9,7 +9,7 @@ showCalendar(<%= month %>, <%= year %>);
   `<div class='modal-row' data-id='${id}'>
      <div class='modal-cell'><%= note.title %></div>
      <div class='modal-cell'><%= note.text %></div>
-     <div class='modal-cell'><%= note.date %></div>
+     <div class='modal-cell'><%= note.time&.strftime('%H:%M') %></div>
      <div class='modal-close'></div>
    </div>`)
 <% end %>

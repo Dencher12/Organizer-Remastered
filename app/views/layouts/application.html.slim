@@ -9,9 +9,15 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    p class="notice" = notice
-    p class="alert" = alert
-    = link_to "Выйти", destroy_user_session_path, method: :delete 
+    .flash-wrapper
+      - flash.each do |type, msg|
+        - if type == 'alert'
+          .flash.alert = msg
+        - if type == 'notice'  
+          .flash.notice = msg 
+
+
+    = link_to "", destroy_user_session_path, method: :delete , class: "exit"
 
     .curtain
     .modal-window
@@ -23,6 +29,15 @@ html
         = form_with(url: '/notes', method: :post, remote: true) do |f|
           = f.text_field :title, placeholder: "Название"
           = f.text_field :text, placeholder: "Описание"
+          = f.time_field :time, placeholder: "Время"
           = f.text_field :date, class: 'date'
           = f.submit "Создать"
     = yield
+
+    javascript:
+      setInterval(function() {
+        $(".flash").hide();  
+      }, 3000);
+      
+      
+

@@ -2,6 +2,7 @@ class CalendarController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    session[:js_code] = true
     @year = Date.today.strftime("%Y")
     @month = Date.today.strftime("%m").to_i - 1
   end  

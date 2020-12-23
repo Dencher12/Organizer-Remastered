@@ -21,3 +21,12 @@ form {
 a {
   color: white;
 }
+
+.exit {
+  display: block;
+  width: 64px;
+  height: 64px;
+  background-image: url(exit.png);
+  background-size: 60%;
+  background-repeat: no-repeat;
+}

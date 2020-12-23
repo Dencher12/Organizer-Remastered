@@ -76,7 +76,7 @@ $(document).ready(() => {
                   <div class='modal-table id-${date}'>
                     <div class='modal-cell-head'>Название</div>
                     <div class='modal-cell-head'>Описание</div>
-                    <div class='modal-cell-head'>Дата</div>
+                    <div class='modal-cell-head'>Время</div>
                     <div></div>
                   </div>`
                   )

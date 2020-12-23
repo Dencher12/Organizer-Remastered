@@ -6,14 +6,19 @@
   background: black
   opacity: 0.4
   visibility: hidden
+  top: 0
 
 .modal-window
   position: fixed
   z-index: 11
   background: grey
   width: 50%
-  height: 60vh
+  height: 50%
   left: 50%
+  max-width: 60rem
+  max-height: 40rem
+  min-width: 30rem
+  min-height: 20rem
   top: 50%
   transform: translate(-50%, -50%)
   border-radius: .2rem
@@ -68,6 +73,10 @@
   #title, #text
     width: 45%
     min-width: 5rem
+
+  #time
+    width: 7rem
+
 
 .modal-close
     width: 2rem

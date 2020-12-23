@@ -6,3 +6,7 @@ default: &default
 development:
   <<: *default
   database: organizer_development
+
+production:
+  <<: *default
+  database: organizer_production 
