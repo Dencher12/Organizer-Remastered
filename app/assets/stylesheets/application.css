@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+form {
+  margin: 0;
+}
+
+a {
+  color: white;
+}
+
+.exit {
+  display: block;
+  width: 39px;
+  height: 39px;
+  background-image: url(exit.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}

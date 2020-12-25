@@ -1,0 +1,39 @@
+var day = <%= @note.date.strftime("%d") %>;
+var id = <%= @note.id %>;
+
+$(`.date-picker[data-date="${day}"] ul li[data-id=${id}]`).remove();
+$(`.modal-table.id-${day} .modal-row[data-id="${id}"]`).remove();
+
+$(`.date-picker[data-date="${day}"] ul`).append(`<li data-id="${id}">
+                                                     <%= @note.title %> <%= @note.time&.strftime('%H:%M') %>
+                                                   </li>`);
+$(`.modal-table.id-${day}`).append(
+  `<div class='modal-row' data-id='${id}'>
+     <div class='modal-cell'><%= @note.title %></div>
+     <div class='modal-cell'><%= @note.text %></div>
+     <div class='modal-cell'><%= @note.time&.strftime('%H:%M') %></div>
+     <div class='modal-edit'></div>
+     <div class='modal-close'></div>
+     <%= render 'notes/edit-form', note: @note%>
+   </div>`)
+
+$('.modal-close').click(function() {
+  let id = $(this).parent('.modal-row').attr('data-id');
+  console.log($(this));
+  $.ajax({
+    url: `/notes/${id}`,
+    type: 'DELETE'
+  });
+});
+
+(function() {
+  let modalEdit = document.querySelector(`.modal-row[data-id="${id}"] .modal-edit`);
+  let formEdit = document.querySelector(`.modal-row[data-id="${id}"] .form-edit`);
+  modalEdit.addEventListener('click', function(event) {
+    if(formEdit.style.display == 'none') {
+      formEdit.style.display = 'contents';
+    } else {
+      formEdit.style.display = 'none';
+    }  
+  }); 
+})();    

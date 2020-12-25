@@ -1,0 +1,10 @@
+.form-edit style="display:none"
+  = form_for note, remote: :js do |f|
+    = f.text_field :title, placeholder: "Название"
+    = f.text_field :text, placeholder: "Описание"
+    = f.time_field :time, placeholder: "Время", value: "#{note.time&.strftime('%H:%M')}"
+    = f.text_field :date, class: 'date'
+    = f.text_field :id, value: "#{note.id}", type: "hidden"
+    = f.submit "Изменить"
+  .space
+  .space

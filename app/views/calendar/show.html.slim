@@ -1,0 +1,29 @@
+div class="wrapper"
+  div class="container-calendar"
+    h3 id="monthAndYear"
+    div class="button-container-calendar"
+      button id="previous" &#8249;
+      button id="next" &#8250;
+          
+    div class="table-calendar" id="calendar"
+          
+    div class="footer-container-calendar"
+      label for="month" Переместиться: 
+      select id="month" class="jump month"
+        option value=0 Янв
+        option value=1 Фев
+        option value=2 Мар
+        option value=3 Апр
+        option value=4 Май
+        option value=5 Июн
+        option value=6 Июл
+        option value=7 Авг
+        option value=8 Сен
+        option value=9 Окт
+        option value=10 Ноя
+        option value=11 Дек
+
+      select id="year" class="jump year"  
+
+javascript:
+  $.get( "/load_notes", {year: "#{@year}", month: "#{@month}"});
