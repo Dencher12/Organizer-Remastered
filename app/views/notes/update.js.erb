@@ -1,6 +1,9 @@
 var day = <%= @note.date.strftime("%d") %>;
 var id = <%= @note.id %>;
 
+$(`.date-picker[data-date="${day}"] ul li[data-id=${id}]`).remove();
+$(`.modal-table.id-${day} .modal-row[data-id="${id}"]`).remove();
+
 $(`.date-picker[data-date="${day}"] ul`).append(`<li data-id="${id}"><%= @note.title %></li>`);
 $(`.modal-table.id-${day}`).append(
   `<div class='modal-row' data-id='${id}'>
@@ -31,4 +34,4 @@ $('.modal-close').click(function() {
       formEdit.style.display = 'none';
     }  
   }); 
-})();
+})();    

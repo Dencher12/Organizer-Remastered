@@ -26,7 +26,7 @@ html
         .close-btn
       .content
       .form-create
-        = form_with(url: '/notes', method: :post, remote: true) do |f|
+        = form_with(url: '/notes', method: :post, remote: true, scope: :note) do |f|
           = f.text_field :title, placeholder: "Название"
           = f.text_field :text, placeholder: "Описание"
           = f.time_field :time, placeholder: "Время"

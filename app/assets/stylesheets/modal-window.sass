@@ -53,7 +53,7 @@
 
 .modal-table
   display: none
-  grid-template-columns: 3fr 4fr 2fr .5fr
+  grid-template-columns: 3fr 4fr 2fr .5fr .5fr
 
   .modal-row
     display: contents
@@ -64,17 +64,17 @@
     margin: .2rem
     text-align: center
 
-.form-create .date
+.date
   display: none 
 
 .form-create form
   display: flex
 
-  #title, #text
+  #note_title, #note_text
     width: 45%
     min-width: 5rem
 
-  #time
+  #note_time
     width: 7rem
 
 
@@ -84,4 +84,33 @@
     background-image: url(close.png)
     background-size: 100%
     background-repeat: no-repeat 
-    display: inline-block    
+    display: inline-block
+
+.modal-edit
+    width: 2rem
+    height: 2rem
+    background-image: url(edit.png)
+    background-size: 80%
+    background-position: center
+    background-repeat: no-repeat 
+    display: inline-block        
+
+.form-edit
+  display: none
+
+.edit_note
+  display: flex
+  grid-column: span 3
+
+  #note_title, #note_text
+    width: 45%
+    min-width: 5rem
+
+  #note_time
+    width: 7rem
+
+  .space
+    width: 100%    
+
+  *
+    margin: .2rem  

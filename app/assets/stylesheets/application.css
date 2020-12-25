@@ -24,9 +24,9 @@ a {
 
 .exit {
   display: block;
-  width: 64px;
-  height: 64px;
+  width: 39px;
+  height: 39px;
   background-image: url(exit.png);
-  background-size: 60%;
+  background-size: 100%;
   background-repeat: no-repeat;
 }

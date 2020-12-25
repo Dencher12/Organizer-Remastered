@@ -20,26 +20,24 @@ $(document).ready(() => {
 
     let calendar = document.getElementById("calendar");
     calendar.getAttribute('data-lang');
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+    let days = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
 
-    let dayHeader = "<tr>";
-    for (let day in days) {
-      dayHeader += "<th data-days='" + days[day] + "'>" + days[day] + "</th>";
-    }
-    dayHeader += "</tr>";
-    document.getElementById("thead-month").innerHTML = dayHeader;
     monthAndYear = document.getElementById("monthAndYear");
     
 
     showCalendar = function(month, year) {
 
+      calendar.innerHTML = ""
+
       let firstDay = ( new Date( year, month ) ).getDay() - 1;
 
-      let tbl = document.getElementById("calendar-body");
-
-
-      tbl.innerHTML = "";
+      let dayHeader = "<div class='row'>";
+      for (let day in days) {
+        dayHeader += "<div data-days='" + days[day] + "'>" + days[day] + "</div>";
+      }
+      dayHeader += "</div>";
+      calendar.innerHTML = dayHeader;
 
 
       monthAndYear.innerHTML = months[month] + " " + year;
@@ -49,18 +47,19 @@ $(document).ready(() => {
       // creating all cells
       let date = 1;
       for ( let i = 0; i < 6; i++ ) {
-          let row = document.createElement("tr");
+          let row = document.createElement("div");
+          row.classList.add("row"); 
 
           for ( let j = 0; j < 7; j++ ) {
               if ( i === 0 && j < firstDay ) {
-                  let cell = document.createElement( "td" );
+                  let cell = document.createElement("div");
                   let cellText = document.createTextNode("");
                   cell.appendChild(cellText);
                   row.appendChild(cell);
               } else if (date > daysInMonth(month, year)) {
                   break;
               } else {
-                  let cell = document.createElement("td");
+                  let cell = document.createElement("div");
                   cell.setAttribute("data-date", date);
                   cell.setAttribute("data-month", month + 1);
                   cell.setAttribute("data-year", year);
@@ -68,6 +67,7 @@ $(document).ready(() => {
                   cell.addEventListener("click", function(e){
                     $(".curtain").css("visibility", "visible");
                     $(".modal-window").css("display", "flex");
+                    $("#title, #text, #time").val('');
                     console.log($(`.modal-table.id-${this.getAttribute('data-date')}`))
                     $(`.modal-table.id-${this.getAttribute('data-date')}`).css("display", "grid");
                     $('.form-create .date').attr('value', this.getAttribute('data-year')+'-'+this.getAttribute('data-month')+'-'+this.getAttribute('data-date'))
@@ -77,6 +77,7 @@ $(document).ready(() => {
                     <div class='modal-cell-head'>Название</div>
                     <div class='modal-cell-head'>Описание</div>
                     <div class='modal-cell-head'>Время</div>
+                    <div></div>
                     <div></div>
                   </div>`
                   )
@@ -91,7 +92,7 @@ $(document).ready(() => {
               }
           }
 
-          tbl.appendChild(row);
+          calendar.appendChild(row);
       }
     }
 

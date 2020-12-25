@@ -10,14 +10,29 @@ showCalendar(<%= month %>, <%= year %>);
      <div class='modal-cell'><%= note.title %></div>
      <div class='modal-cell'><%= note.text %></div>
      <div class='modal-cell'><%= note.time&.strftime('%H:%M') %></div>
+     <div class='modal-edit'></div>
      <div class='modal-close'></div>
+     <%= render 'notes/edit-form', note: note%>
    </div>`)
 <% end %>
 
+
 $('.modal-close').click(function() {
-      let id = $(this).parent('.modal-row').attr('data-id');
-      $.ajax({
-        url: `/notes/${id}`,
-        type: 'DELETE'
-      });
-    });
+  let id = $(this).parent('.modal-row').attr('data-id');
+  $.ajax({
+    url: `/notes/${id}`,
+    type: 'DELETE'
+  });
+});
+
+(function() {
+  let modalEdit = document.querySelector(`.modal-row[data-id="${id}"] .modal-edit`);
+  let formEdit = document.querySelector(`.modal-row[data-id="${id}"] .form-edit`);
+  modalEdit.addEventListener('click', function(event) {
+    if(formEdit.style.display == 'none') {
+      formEdit.style.display = 'contents';
+    } else {
+      formEdit.style.display = 'none';
+    }  
+  }); 
+})();     
