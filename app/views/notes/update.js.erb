@@ -4,7 +4,9 @@ var id = <%= @note.id %>;
 $(`.date-picker[data-date="${day}"] ul li[data-id=${id}]`).remove();
 $(`.modal-table.id-${day} .modal-row[data-id="${id}"]`).remove();
 
-$(`.date-picker[data-date="${day}"] ul`).append(`<li data-id="${id}"><%= @note.title %></li>`);
+$(`.date-picker[data-date="${day}"] ul`).append(`<li data-id="${id}">
+                                                     <%= @note.title %> <%= @note.time&.strftime('%H:%M') %>
+                                                   </li>`);
 $(`.modal-table.id-${day}`).append(
   `<div class='modal-row' data-id='${id}'>
      <div class='modal-cell'><%= @note.title %></div>

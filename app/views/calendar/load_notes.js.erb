@@ -3,7 +3,9 @@ showCalendar(<%= month %>, <%= year %>);
 <% @notes.each do |note| %>
   var day = <%= note.date.strftime("%d") %>;
   var id = <%= note.id %>;
-  $(`.date-picker[data-date="${day}"] ul`).append(`<li data-id="${id}"><%= note.title %></li>`);
+  $(`.date-picker[data-date="${day}"] ul`).append(`<li data-id="${id}">
+                                                     <%= note.title %> <%= "#{note.time&.strftime('%H:%M')} "%>
+                                                   </li>`);
 
   $(`.modal-table.id-${day}`).append(
   `<div class='modal-row' data-id='${id}'>

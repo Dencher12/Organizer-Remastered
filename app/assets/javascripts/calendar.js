@@ -65,12 +65,14 @@ $(document).ready(() => {
                   cell.setAttribute("data-year", year);
                   cell.setAttribute("data-month_name", months[month]);
                   cell.addEventListener("click", function(e){
+                    let date = this.getAttribute('data-year')+'-'+this.getAttribute('data-month')+'-'+this.getAttribute('data-date')
                     $(".curtain").css("visibility", "visible");
                     $(".modal-window").css("display", "flex");
-                    $("#title, #text, #time").val('');
+                    $(".window-date").html(date)
+                    $(".form-create #note_title, .form-create #note_text, .form-create #note_time").val('');
                     console.log($(`.modal-table.id-${this.getAttribute('data-date')}`))
                     $(`.modal-table.id-${this.getAttribute('data-date')}`).css("display", "grid");
-                    $('.form-create .date').attr('value', this.getAttribute('data-year')+'-'+this.getAttribute('data-month')+'-'+this.getAttribute('data-date'))
+                    $('.form-create .date').attr('value', date)
                   });
                   $(".modal-window .content").append(`
                   <div class='modal-table id-${date}'>

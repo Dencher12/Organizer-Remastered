@@ -16,13 +16,13 @@ html
         - if type == 'notice'  
           .flash.notice = msg 
 
-
-    = link_to "", destroy_user_session_path, method: :delete , class: "exit"
+    - if current_user.present?
+      = link_to "", destroy_user_session_path, method: :delete , class: "exit"
 
     .curtain
     .modal-window
       .top-bar
-        .window-name
+        .window-date
         .close-btn
       .content
       .form-create

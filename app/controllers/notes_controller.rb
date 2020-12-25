@@ -30,9 +30,12 @@ class NotesController < ApplicationController
     Sidekiq::ScheduledSet.new.find_job(@note.job_id)&.delete
     @note.job_id = nil
     @note.save
-             
-    NotesMailer.delay_until(Time.parse("#{@note.date} #{@note.time.strftime("%H:%M")}"))
-               .notice(current_user.id, @note.id)          
+     
+    time = Time.parse("#{note_params[:date]} #{note_params[:time]}")
+    if time > Time.now
+      NotesMailer.delay_until(Time.parse("#{@note.date} #{@note.time.strftime("%H:%M")}"))
+                .notice(current_user.id, @note.id)  
+    end                    
     
     render :update
   end  
